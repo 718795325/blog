@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    {% block heard %}
+        <html class=" js csstransforms3d"><head>
+        <meta charset="utf-8">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>文章内容</title>
+        <link rel="stylesheet" href="/static/css/base.css">
+        <link rel="stylesheet" href="/static/css/page.css">
+
+        <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/static/js/main.js"></script>
+        <script type="text/javascript" src="/static/js/modernizr.js"></script>
+
+    </head>
+    {% endblock heard %}
+        <body style="background: #f6f5fa;">
+
+            <!--content S-->
+            <div class="super-content RightMain" id="RightMain">
+
+            <!--header-->
+
+            <div class="superCtab">
+            <div class="ctab-title clearfix"><h3><a href="{% url 'App:xinwen' %}" style="text-align: center">文章内容</a></h3><a href="javascript:;" class="sp-column"><i class="ico-mng"></i>栏目管理</a></div>
+
+                <div class="ctab-Main">
+                    <div class="ctab-Main-title">
+                        <ul class="clearfix">
+                        </ul>
+
+                    </div>
+            <div class="ctab-Mian-cont">
+            <div class="Mian-cont-btn clearfix">
+                <a href="{% url 'App:xinwen'%}"><p style="font-size: 21px ; margin-left: 30px">文章首页</p></a>
+                {% block searchBar %}
+                    <div class="searchBar">
+                        <input type="text" id="" value="" class="form-control srhTxt" placeholder="输入标题关键字搜索">
+                        <input type="button" class="srhBtn" value="">
+                    </div>
+                {% endblock searchBar %}
+            </div>
+                <div class="Mian-cont-wrap">
+                <div class="defaultTab-T" style="width: 800px;height: 600px; margin-left: 236px" >
+                    {% autoescape on %}
+                        <div class="title_01" style="text-align: center ; margin-top: 30px"><p style="font-size: 30px">{{ article.title | safe}}</p></div>
+                    {% endautoescape %}
+                    <br>
+                    <br>
+                    {% autoescape on %}
+                        <div ><p style="font-size: 16px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ article.content |safe }}</p></div>
+                    {% endautoescape %}
+            <script type="text/javascript" src="/static/js/zxxFile.js"></script>
+
+        </body></html>

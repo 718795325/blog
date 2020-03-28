@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body background="/static/images/bg.jpg">
+<div class="AAA" style="margin-top: 100px; text-align: center">
+    {{ msg }}
+<form action="{% url 'App:register' %}" method="post">
+    {% csrf_token %}
+    用户名：&nbsp&nbsp&nbsp&nbsp<input class="BBB" style="width: 400px;height: 40px" type="text" name="username" >
+    {{ form.username.errors }}
+    <br>
+    <br>
+    密码：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span><input class="BBB" style="width: 400px;height: 40px" type="password" name="password">
+    {{ form.password.errors }}
+    <br>
+    <br>
+    确认密码：<input style="width: 400px;height: 40px" type="password" name="confirm">
+    {{ form.confirm.errors }}
+    <br>
+    <br>
+    电话：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input style="width: 400px;height: 40px" type="text" name="phone">
+    {{ form.phone.errors }}
+    <br>
+    <br>
+    邮箱：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input style="width: 400px;height: 40px" type="text" name="email"><br><br>
+    <input style="height: 40px; width: 70px;  margin-left: 30px" type="submit" value="注册">
+</form>
+    </div>
+</body>
+</html>

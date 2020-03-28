@@ -1,0 +1,105 @@
+{% extends 'wenzhang_xinwen_fat.html' %}
+<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>文章发布</title>
+	<link rel="stylesheet" href="/static/css/base.css">
+	<link rel="stylesheet" href="/static/css/page.css">
+
+	<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/main.js"></script>
+	<script type="text/javascript" src="/static/js/modernizr.js"></script>
+</head>
+
+<body style="background: #f6f5fa;">
+
+	<!--content S-->
+	<div class="super-content RightMain" id="RightMain">
+		{% block content_S %}
+		<!--header-->
+		<div class="superCtab">
+			<div class="ctab-title clearfix"><h3>文章发布</h3><a href="#" class="sp-column"><i class="ico-mng"></i>栏目管理</a></div>
+			
+			<div class="ctab-Main">
+            {% block  ctab-Main-title%}
+				<div class="ctab-Main-title">
+					<ul class="clearfix">
+                        {% for catagory in categories %}
+
+{#						<li class="cur"><a href="{% url 'App:xinwen' cid=category.cid %}">{{ category.name }}</a></li>#}
+
+                            <li><a href="{% url 'App:xinwen' cid=catagory.cid %}">{{ catagory.name }}</a></li>
+
+                        {% endfor %}
+
+                </ul>
+
+            </div>
+				{% endblock ctab-Main-title %}
+				<div class="ctab-Mian-cont">
+					<div class="Mian-cont-btn clearfix">
+                        {% block ctab-Mian %}
+						<div class="operateBtn">
+							<a href="{% url 'App:art_publick' cid=cid %}" class="greenbtn publish">发布文章</a>
+						</div>
+                            {% endblock ctab-Mian %}
+                        {% block searchBar %}
+						<div class="searchBar">
+                            <form action="{% url 'App:xinwen'  cid=cid %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="cid" value="{{ cid }}">
+                                <input type="text" name="search"   value=""  class="form-control srhTxt"   >
+                                <input type="submit"  class="srhBtn"  value="">
+                            </form>
+
+                        </div>
+                            {% endblock searchBar %}
+					</div>
+					<div class="super-label clearfix">
+					</div>
+					{% block Mian-cont-wrap %}
+					<div class="Mian-cont-wrap">
+						<div class="defaultTab-T">
+							<table border="0" cellspacing="0" cellpadding="0" class="defaultTable">
+								<tbody><tr><th class="t_1">文章ID</th><th class="t_2">文章标题</th><th class="t_3">发布时间</th><th class="t_4">操作</th></tr>
+							</tbody></table>
+						</div>
+						<table border="0" cellspacing="0" cellpadding="0" class="defaultTable defaultTable2">
+							<tbody>
+                            {% for article in pager.object_list %}
+                            <tr>
+								<td class="t_1">{{ article.aid }}</td>
+								<td class="t_2"><a href="{% url 'App:content' aid=article.aid%}">{{ article.title }}</a></td>
+								<td class="t_3">{{ article.create_time }}</td>
+								<td class="t_4"><div class="btn"><a href="{% url 'App:art_pub' aid=article.aid %}" class="modify">修改</a><a href="{% url 'App:art_del' aid=article.aid cid=cid page=page %}" class="delete">删除</a></div></td>
+							</tr>
+							{% endfor %}
+
+						</tbody></table>
+                    {% endblock Mian-cont-wrap %}
+                    {% block pagesS-- %}
+						<!--pages S-->
+						<div class="pageSelect">
+							<span>共 <b>{{ pa_count }}</b> 条 每页 <b> 4 </b>条   {{ page }}/{{ pa_all }}</span>
+							<div class="pageWrap">
+								<a class="pagePre"><i class="ico-pre">&nbsp;</i></a>
+                                {% for pag in pa %}
+								<a href="{% url 'App:xinwen' cid=cid page=pag %}" class="pagenumb cur">{{ pag }}</a>
+                                {% endfor %}
+								<a href="#" class="pagenext"><i class="ico-next">&nbsp;</i></a>
+							</div>
+						</div>
+						<!--pages E-->
+
+                        {% endblock pagesS-- %}
+					</div>
+				
+				</div>
+			</div>
+		</div>
+        {% endblock content_S %}
+		<!--main-->
+		
+    </div>>
